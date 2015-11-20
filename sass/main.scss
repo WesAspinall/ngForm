@@ -1,7 +1,25 @@
 // Put any @imports here
 // See Readme for a list of supported ones
 @import 'font-awesome';
+@import 'foundation';
 
 body {
-  background: #e2ebf3;
+  font-family: 'Courier';
+}
+
+.formContainer{
+  width: 500px;
+  margin: 0 5%;
+  h1{
+    font-family: 'Courier';
+  }
+  button{
+    border-radius: 50px;
+    box-shadow: 2px 2px 2px black;
+    background: grey;
+    font-family: 'Courier';
+  }
+  button:hover{
+    background: #57A36E;
+  }
 }
