@@ -8408,13 +8408,18 @@ th.hide-for-touch {
     display: table-cell !important; } }
 
 body {
-  font-family: 'Courier'; }
+  font-family: 'Courier';
+  background-image: url(http://www.creattor.com/files/37/3470/drips-and-spray-paint-textures-screenshots-5.png);
+  background-repeat: no-repeat;
+  background-position: center right; }
 
 .formContainer {
   width: 500px;
   margin: 0 5%; }
   .formContainer h1 {
     font-family: 'Courier'; }
+  .formContainer input {
+    border-radius: 20px; }
   .formContainer button {
     border-radius: 50px;
     box-shadow: 2px 2px 2px black;

@@ -12,7 +12,7 @@ let config = function($stateProvider, $urlRouterProvider) {
     })
     .state('root.home', {
       url: '/',
-      controller: 'HomeController',
+      controller: 'HomeController as vm',
       templateUrl: 'templates/home.tpl.html'
     });
 };

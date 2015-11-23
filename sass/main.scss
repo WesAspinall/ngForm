@@ -5,13 +5,18 @@
 
 body {
   font-family: 'Courier';
+  background-image: url(http://www.creattor.com/files/37/3470/drips-and-spray-paint-textures-screenshots-5.png);
+  background-repeat: no-repeat;
+  background-position: center right;
 }
-
 .formContainer{
   width: 500px;
   margin: 0 5%;
   h1{
     font-family: 'Courier';
+  }
+  input{
+    border-radius: 20px;
   }
   button{
     border-radius: 50px;

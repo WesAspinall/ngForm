@@ -16,7 +16,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
     template: '<div class="container" ui-view></div>'
   }).state('root.home', {
     url: '/',
-    controller: 'HomeController',
+    controller: 'HomeController as vm',
     templateUrl: 'templates/home.tpl.html'
   });
 };
@@ -27,7 +27,27 @@ exports['default'] = config;
 module.exports = exports['default'];
 
 },{}],2:[function(require,module,exports){
-"use strict";
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var HomeController = function HomeController(HomeService) {
+
+  var vm = this;
+
+  vm.addContact = addContact;
+
+  function addContact(obj) {
+    HomeService.addContact(obj).then(function (res) {
+      console.log(res);
+    });
+  }
+};
+HomeController.$inject = ['HomeService'];
+
+exports['default'] = HomeController;
+module.exports = exports['default'];
 
 },{}],3:[function(require,module,exports){
 'use strict';
@@ -52,20 +72,46 @@ var _servicesHomeService = require('./services/home.service');
 
 var _servicesHomeService2 = _interopRequireDefault(_servicesHomeService);
 
-_angular2['default'].module('app', ['ui.router']).config(_config2['default']).controller('HomeController', _controllersHomeController2['default']).service('HomeService', _servicesHomeService2['default']);
+_angular2['default'].module('app', ['ui.router']).constant('PARSE', {
+  URL: 'https://api.parse.com/1',
+  CONFIG: {
+    headers: {
+      'X-Parse-Application-Id': 'sflCiC2xgPmNK1K1bjsC6admwP6YZYoYTOdflHPo',
+      'X-Parse-REST-API-Key': 'bZKebj6uJsNHc4aIZPeQsooMbN4s9yOwvIx0Gote'
+    }
+  }
+}).config(_config2['default']).controller('HomeController', _controllersHomeController2['default']).service('HomeService', _servicesHomeService2['default']);
 
 },{"./config":1,"./controllers/home.controller":2,"./services/home.service":4,"angular":7,"angular-ui-router":5}],4:[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeService = function HomeService() {};
+var HomeService = function HomeService($http, PARSE) {
 
-HomeService.$inject = [];
+  var url = PARSE.URL + '/classes/contacts';
 
-exports["default"] = HomeService;
-module.exports = exports["default"];
+  this.addContact = addContact;
+
+  var Contact = function Contact(obj) {
+    this.name = obj.name;
+    this.email = obj.email;
+    this.website = obj.website;
+    this.message = obj.message;
+  };
+
+  function addContact(obj) {
+    console.log(obj.name);
+    var c = new Contact(obj);
+    return $http.post(url, c, PARSE.CONFIG);
+  };
+};
+
+HomeService.$inject = ['$http', 'PARSE'];
+
+exports['default'] = HomeService;
+module.exports = exports['default'];
 
 },{}],5:[function(require,module,exports){
 /**
