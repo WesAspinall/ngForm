@@ -1,15 +1,14 @@
-let HomeController =  function (HomeService) {
+let HomeController =  function ( HomeService) {
 
-let vm = this
- 
- vm.addContact = addContact;
+let vm  = this;
 
- function addContact (obj){
-  HomeService.addContact(obj).then((res) =>{
-    console.log(res);
-  })
- }
+   vm.addContact = function (obj){
+
+   return HomeService.addContact(obj);
+
+   }
+
+
 };
-HomeController.$inject=[ 'HomeService'];
-
+HomeController.$inject= ['HomeService'];
 export default HomeController;

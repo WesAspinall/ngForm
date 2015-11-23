@@ -1,18 +1,25 @@
 <div class="formContainer">
   <h1>contact us</h1>
 
-  <form ng-submit="vm.addContact(contact)">
 
-    <span class="inputTitle">name</span>
+  <form ng-submit="vm.addContact(contact)">
+    <span class="warningText">{{text}}</span>
+
+    <span ng-model ="contact.text"></span>
+    <span class="inputTitle">name</span> 
+    <span class="warningText">{{contact.nameText}}</span>
     <input ng-model="contact.name" class="name">
 
-    <span class="inputTitle">email</span>
+    <span class="inputTitle">email</span> 
+    <span class="warningText">{{contact.emailText}}</span>
     <input ng-model="contact.email"class="email" type="email">
 
-    <span class="inputTitle">website</span>
+    <span class="inputTitle">website</span> 
+    <span class="warningText">{{contact.websiteText}}</span>
     <input ng-model="contact.website" class="website">
 
-    <span class="inputTitle">message</span>
+    <span class="inputTitle">message</span> 
+    <span class="warningText">{{contact.messageText}}</span>
     <input ng-model="contact.message" class="message" type="text">
 
     <button>submit</button>

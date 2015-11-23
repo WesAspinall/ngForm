@@ -30,22 +30,18 @@ module.exports = exports['default'];
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-  value: true
+   value: true
 });
 var HomeController = function HomeController(HomeService) {
 
-  var vm = this;
+   var vm = this;
 
-  vm.addContact = addContact;
+   vm.addContact = function (obj) {
 
-  function addContact(obj) {
-    HomeService.addContact(obj).then(function (res) {
-      console.log(res);
-    });
-  }
+      return HomeService.addContact(obj);
+   };
 };
 HomeController.$inject = ['HomeService'];
-
 exports['default'] = HomeController;
 module.exports = exports['default'];
 
@@ -94,18 +90,66 @@ var HomeService = function HomeService($http, PARSE) {
 
   this.addContact = addContact;
 
-  var Contact = function Contact(obj) {
-    this.name = obj.name;
-    this.email = obj.email;
-    this.website = obj.website;
-    this.message = obj.message;
-  };
-
   function addContact(obj) {
-    console.log(obj.name);
+
+    var Contact = function Contact(obj) {
+      this.name = obj.name;
+      this.email = obj.email;
+      this.website = obj.website;
+      this.message = obj.message;
+      this.nameText = obj.nameText;
+      this.emailText = obj.emailText;
+      this.websiteText = obj.websiteText;
+      this.messageText = obj.messageText;
+      this.text = obj.text;
+    };
+
     var c = new Contact(obj);
+
+    if (!obj) {
+      return console.log('you have nothing');
+    }
+
+    if (!validateEmpty(obj.name)) {
+      return obj.nameText = 'name is empty';
+    }
+
+    if (!validateEmpty(obj.email)) {
+      return obj.emailText = 'email is empty';
+    }
+
+    if (!validateEmpty(obj.website)) {
+      return obj.websiteText = 'website is empty';
+    }
+
+    if (!validateEmpty(obj.message)) {
+      return obj.messageText = 'message is empty';
+    }
+
+    if (!validateEmail(obj.email)) {
+      return obj.emailText = 'email needs an @ symbol';
+    }
+
+    if (!validateWebsite(obj.website)) {
+      return obj.websiteText = 'website needs to be valid';
+    }
+
+    alert('contact submitted!');
     return $http.post(url, c, PARSE.CONFIG);
   };
+
+  function validateEmpty(field) {
+    return field ? true : false;
+  }
+
+  function validateEmail(field) {
+    return field.indexOf('@') >= 0 ? true : false;
+  }
+
+  function validateWebsite(field) {
+    var pattern = /^https?:\/\//i;
+    return pattern.test(field);
+  }
 };
 
 HomeService.$inject = ['$http', 'PARSE'];

@@ -8428,4 +8428,8 @@ body {
   .formContainer button:hover {
     background: #57A36E; }
 
+.warningText {
+  color: red;
+  font-style: italic; }
+
 /*# sourceMappingURL=main.css.map */
